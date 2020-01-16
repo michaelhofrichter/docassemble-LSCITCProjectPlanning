@@ -1,0 +1,211 @@
+---
+metadata:
+  title: |
+    Document Assembly Project Planning Questions
+  short title: |
+    Project Planning
+  description: |
+    This interview is designed to help you figure out what you want in a Document Assembly tool.
+  authors:
+    - name: Michael Hofrichter
+      organization: Houston Volunteer Lawyers 
+  revision_date: 2020-01-16
+---
+include: 
+  - basic-questions.yml
+---
+objects:
+  - user: individual
+---
+mandatory: true
+code: | 
+  intro
+  finale
+---
+question: | 
+  LSC ITC Challenges for New Developers
+subquestion: |
+  ## Introduction
+  
+  This interview helps walk you through some of the basic questions to think about when planning a document assembly project.
+  
+  Specifically it covers:
+  
+  1. Audience
+  2. Platform Requirements
+  3. Source Material
+  4. Budget
+  5. Expert
+  6. Testing Plan
+
+  When you finish the plan, you'll have the option to receive it as an email in addition to seeing the final results.
+field: intro
+---
+event: finale
+question: |
+  Results
+subquestion: |
+  % if email_me:
+    % if send_email_ok: 
+  An email was sent with this information. 
+    % endif
+  % endif
+
+  ${ questions } 
+buttons: 
+  - exit: exit
+  - restart: restart
+---
+code: |
+  send_email_ok = send_email(to=user, template=questions)
+---
+template: questions
+subject: |
+  Document Assembly Project Planning
+content: |
+  **1. Who is the audience?**
+  
+  % if audience['Other']:
+  ${ comma_and_list(audience,audience_other) }
+  % else: 
+  ${ comma_and_list(audience) }
+  % endif
+  
+  **2. What are the requirements for the platform?**
+  
+  % if platform_language:
+  * Multiple Language Support
+  % endif
+  % if platform_mobile:
+  * Mobile Access Support
+  % endif
+  % if platform_saving: 
+  * Saving Answer Files Support
+  % endif
+  % if platform_multi:
+  * Multiple Stage Interviews
+  % endif
+  % if platform_texting:
+  * Texting Abilities
+  % endif
+  % if platform_email:
+  * Email Sending
+  % endif
+  % if platform_efiling:
+  * Efiling Capabilities
+  % endif
+  % if len(platform_other) > 1:
+  * ${ platform_other } 
+  % endif
+  
+  **3. What is the source material?**
+  
+  ${ comma_and_list(source) } 
+  
+  **4. What is your budget?** 
+  
+  ${ currency(budget) } 
+  % if len(budget_narrative) > 0:
+  ${ budget_narrative } 
+  % endif 
+  
+  **5. Who is your content expert?** 
+  
+  ${ expert }
+  
+  **6. What is your testing plan?** 
+  
+  ${ testing }
+---
+question: |
+  Audience
+subquestion: |
+  Who is the audience?
+fields: 
+  - "Audience": audience
+    datatype: checkboxes
+    choices: 
+      - Self Represented Litigant: SRL
+      - Pro Bono Attorney: PB
+      - Staff Attorney: Staff
+      - Other: Other
+    none of the above: false
+  - "Other Audience": audience_other
+    show if: audience['Other']
+---
+question: | 
+  Requirements
+subquestion: |
+  What are the requirements for the platform? Note that the defaults for all of these are false.
+fields: 
+  - Multiple Language Access: platform_language
+    datatype: yesnoradio
+    default: false
+  - Mobile Access: platform_mobile
+    datatype: yesnoradio
+    default: false
+  - Saving capabilities: platform_saving
+    datatype: yesnoradio
+    default: false
+  - Multi-Stage interview: platform_multi
+    datatype: yesnoradio
+    default: false
+  - Texting: platform_texting
+    datatype: yesnoradio
+    default: false
+  - Emailing: platform_email
+    datatype: yesnoradio
+    default: false
+  - Efiling: platform_efiling
+    datatype: yesnoradio
+    default: false
+  - Other Integrations: platform_other
+    required: false
+---
+question: |
+  Expert
+subquestion: |
+  Who is your subject matter expert?
+fields:
+  - no label: expert
+--- 
+question: |
+  Budget
+subquestion: |
+  What is your budget?
+fields: 
+  - Amount: budget
+    datatype: currency
+    min: 0
+  - Budget Narrative: budget_narrative
+    datatype: area
+    required: false
+---
+question: |
+  Testing
+subquestion: | 
+  What is your testing plan? 
+fields: 
+  - no label: testing
+    datatype: area
+---
+question: | 
+  Source Material
+subquestion: |
+  What is your source material that you are seeking to automate?
+fields:
+  - no label: source
+    datatype: checkboxes
+    none of the above: false
+    choices: 
+      - DOCX
+      - PDF
+      - RTF
+      - New form: new
+---
+question: |
+  Email?
+subquestion: |
+  Do you want a copy of this via email?
+yesno: email_me
+---
