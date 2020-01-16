@@ -1,8 +1,1 @@
-# docassemble.LSCITCProjectPlanning
-
-Docassemble tool to help figure out and plan a document automation project.
-
-## Author
-
-System Administrator, admin@admin.com
-
+Designed for the LSC ITC 2020 Session on Challenges for New Developers.

@@ -43,9 +43,9 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
     return out
 
 setup(name='docassemble.LSCITCProjectPlanning',
-      version='0.0.1',
+      version='0.0.2',
       description=('Docassemble tool to help figure out and plan a document automation project.'),
-      long_description='# docassemble.LSCITCProjectPlanning\n\nDocassemble tool to help figure out and plan a document automation project.\n\n## Author\n\nSystem Administrator, admin@admin.com\n\n',
+      long_description='Designed for the LSC ITC 2020 Session on Challenges for New Developers.',
       long_description_content_type='text/markdown',
       author='Michael Hofrichter',
       author_email='michael.hofrichter@hvlp.org',

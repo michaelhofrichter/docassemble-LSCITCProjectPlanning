@@ -94,6 +94,9 @@ content: |
   % if platform_efiling:
   * Efiling Capabilities
   % endif
+  % if platform_analytics:
+  * Analytics
+  % endif
   % if len(platform_other) > 1:
   * ${ platform_other } 
   % endif
@@ -157,6 +160,9 @@ fields:
     datatype: yesnoradio
     default: false
   - Efiling: platform_efiling
+    datatype: yesnoradio
+    default: false
+  - Analytics: platform_analytics
     datatype: yesnoradio
     default: false
   - Other Integrations: platform_other
